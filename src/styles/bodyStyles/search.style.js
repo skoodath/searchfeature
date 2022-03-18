@@ -3,10 +3,13 @@ import styled from "styled-components";
 export const Search = {
   Wrapper: styled.section`
     display: flex;
+    justify-content: center;
     background-color: #f1f3f8;
     padding: 1rem;
   `,
-  Form: styled.form``,
+  Form: styled.form`
+    display: flex;
+  `,
   SearchWrapper: styled.div`
     margin: 1rem 0;
   `,

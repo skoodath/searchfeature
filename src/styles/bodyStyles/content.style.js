@@ -7,7 +7,11 @@ export const Content = {
   `,
   Inner: styled.div`
     display: flex;
+    flex-flow: row wrap;
+    flex-grow: 1;
+    flex-shrink: 0;
     align-items: center;
+    justify-content: center;
     padding: 2rem;
   `,
   Card: styled.article`
