@@ -10,6 +10,7 @@ const { Wrapper, Inner } = Body;
 const BodyComponent = () => {
   const [search, setSearch] = useState("");
   const [searchReg, setSearchReg] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let searchTrim = search.replace(/[^a-z0-9 ]/gi, "");
@@ -27,12 +28,13 @@ const BodyComponent = () => {
         bookValue += book[key].toString().toLowerCase().trim() + " ";
       }
     }
-    console.log(bookValue);
     return bookValue.match(searchReg);
   });
 
   return (
-    <SearchContext.Provider value={{ search, setSearch, filteredList }}>
+    <SearchContext.Provider
+      value={{ search, setSearch, filteredList, error, setError }}
+    >
       <Wrapper>
         <Inner>
           <SearchComponent />

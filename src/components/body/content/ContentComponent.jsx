@@ -1,41 +1,54 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import SearchContext from "../../../context/context";
-import { Content } from "../../../styles/bodyStyles/content.style";
-
-const {
-  Wrapper,
-  Inner,
-  Error,
-  Card,
-  Title,
-  AuthorWrapper,
-  Author,
+import {
+  Content,
   Year,
   Category,
   Description,
-} = Content;
+  Author,
+} from "../../../styles/bodyStyles/content.style";
+
+const { Wrapper, Inner, Error, Close, Card, Title } = Content;
 
 const ContentComponent = () => {
-  const { filteredList } = useContext(SearchContext);
+  const { filteredList, error, setError, setSearch, search } =
+    useContext(SearchContext);
 
+  const closeError = () => {
+    setSearch("");
+    setError(false);
+  };
+  useEffect(() => {
+    if (filteredList.length <= 0 && search.length > 0) setError(true);
+  }, [filteredList, search, setError]);
   return (
     <Wrapper>
       <Inner>
-        {filteredList.length === 0 ? (
-          <Error>Book not found</Error>
-        ) : (
-          filteredList.map((book) => (
-            <Card key={book.id}>
-              <Title>{book.title}</Title>
-              <AuthorWrapper>
-                <Author>{book.author}</Author>
-                <Year>{book.year}</Year>
-              </AuthorWrapper>
-              <Category>{book.category}</Category>
-              <Description>{book.description}</Description>
-            </Card>
-          ))
-        )}
+        <Error error={error}>
+          Search returned no results
+          <Close onClick={closeError}>Close</Close>
+        </Error>
+        {filteredList.map((book) => (
+          <Card key={book.id}>
+            <Title>{book.title}</Title>
+            <Author>
+              <span>Author: </span>
+              {book.author}
+            </Author>
+
+            <Year>
+              <span>Year: </span>
+              {book.year}
+            </Year>
+            <Category>
+              <span>Category: </span>
+              {book.category}
+            </Category>
+            <Description>
+              <span>Description: </span> {book.description}
+            </Description>
+          </Card>
+        ))}
       </Inner>
     </Wrapper>
   );

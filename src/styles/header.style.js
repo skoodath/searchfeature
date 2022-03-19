@@ -11,5 +11,8 @@ export const Header = {
   `,
   Title: styled.h1`
     color: #fff;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-transform: uppercase;
   `,
 };
