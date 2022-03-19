@@ -8,7 +8,7 @@ import {
   Author,
 } from "../../../styles/bodyStyles/content.style";
 
-const { Wrapper, Inner, Error, Close, Card, Title } = Content;
+const { Wrapper, Inner, ErrorWrapper, Error, Close, Card, Title } = Content;
 
 const ContentComponent = () => {
   const { filteredList, error, setError, setSearch, search } =
@@ -23,11 +23,13 @@ const ContentComponent = () => {
   }, [filteredList, search, setError]);
   return (
     <Wrapper>
-      <Inner>
+      <ErrorWrapper>
         <Error error={error}>
           Search returned no results
           <Close onClick={closeError}>Close</Close>
         </Error>
+      </ErrorWrapper>
+      <Inner>
         {filteredList.map((book) => (
           <Card key={book.id}>
             <Title>{book.title}</Title>

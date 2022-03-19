@@ -3,8 +3,11 @@ import styled from "styled-components";
 export const Content = {
   Wrapper: styled.section`
     height: 100%;
-    padding: 1rem;
     position: relative;
+  `,
+  ErrorWrapper: styled.div`
+    position: relative;
+    height: 80px;
     overflow: hidden;
   `,
   Inner: styled.div`
@@ -14,7 +17,7 @@ export const Content = {
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 0;
   `,
   Card: styled.article`
     background-color: #f1f3ff;
@@ -37,7 +40,7 @@ export const Content = {
       error ? "translateY(0%)" : "translateY(-100%)"};
     transition: ${({ error }) =>
       error ? "all 0.4s ease-in" : `opacity 0.1s ease-out`};
-
+    transform-origin: top left;
     color: #ffffff;
     padding: 1rem 2rem;
     width: 100%;
@@ -45,6 +48,7 @@ export const Content = {
     top: 0;
     display: flex;
     align-items: center;
+    z-index: 1;
   `,
   Close: styled.span`
     position: absolute;
