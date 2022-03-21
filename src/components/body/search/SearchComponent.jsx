@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import SearchContext from "../../../context/context";
 import { Search } from "../../../styles/bodyStyles/search.style";
 
@@ -7,9 +7,10 @@ const { Wrapper, Form, SearchWrapper, Input, ResetButton } = Search;
 const SearchComponent = () => {
   const { search, setSearch, error, setError } = useContext(SearchContext);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearch(e.target.value);
+  const searchRef = useRef(null);
+
+  const handleSearch = () => {
+    setSearch(searchRef.current.value);
     setError(false);
   };
 
@@ -27,6 +28,7 @@ const SearchComponent = () => {
             value={search}
             onChange={handleSearch}
             error={error}
+            ref={searchRef}
           />
           <ResetButton type="reset" onClick={handleClear}>
             Clear
